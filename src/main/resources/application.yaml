@@ -1,0 +1,37 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-type: PKCS12
+    key-store-password: supersecret
+    key-alias: tomcat
+  servlet:
+    context-path: /test
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      client:
+        registration:
+          B2C_1_member_susi_flow:
+            provider: B2C_1_member_susi_flow
+            client-id: b52eb21c-0f06-4551-8791-2de5b998a2df
+            client-secret: 'redacted'
+            clientAuthenticationMethod: post
+            authorization-grant-type: authorization_code
+            redirect-uri: "https://localhost:8443/test/login/oauth2/code/B2C_1_member_susi_flow"
+            scope: openid
+            clientName: azure
+        provider:
+          B2C_1_member_susi_flow:
+            authorization-uri: https://procrastinateb2c.b2clogin.com/procrastinateb2c.onmicrosoft.com/b2c_1_member_susi_flow/oauth2/v2.0/authorize
+            token-uri: https://procrastinateb2c.b2clogin.com/procrastinateb2c.onmicrosoft.com/b2c_1_member_susi_flow/oauth2/v2.0/token
+            jwk-set-uri: https://procrastinateb2c.b2clogin.com/procrastinateb2c.onmicrosoft.com/b2c_1_member_susi_flow/oauth2/v2.0/keys
+            user-info-uri:
+            user-name-attribute: sub
+            issuer-uri: https://procrastinateb2c.b2clogin.com/tfp/ee1d4c5c-d902-4763-a436-040fc15bb3ff/b2c_1_member_susi_flow/v2.0/
+              
